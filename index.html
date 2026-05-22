@@ -71,6 +71,7 @@
     align-items: center;
     justify-content: space-between;
     height: 72px;
+    position: relative;
   }
 
   .logo-wrap {
@@ -162,6 +163,10 @@
 
   .icon-btn:hover { background: var(--light-green); }
 
+  .mobile-search-btn {
+    display: none;
+  }
+
   .cart-badge {
     position: absolute;
     top: 2px;
@@ -179,7 +184,7 @@
   }
 
   .whatsapp-btn {
-    background: #25D366;
+    background: var(--deep-green);
     color: white;
     border: none;
     border-radius: 24px;
@@ -196,12 +201,12 @@
 
   .whatsapp-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(37,211,102,0.35);
+    box-shadow: 0 4px 12px rgba(13,61,46,0.28);
   }
 
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, var(--deep-green) 0%, var(--rich-green) 60%, #1d6b4f 100%);
+    background: linear-gradient(180deg, var(--cream) 0%, #fffdf8 58%, var(--white) 100%);
     min-height: 88vh;
     display: flex;
     align-items: center;
@@ -210,9 +215,7 @@
   }
 
   .hero-pattern {
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.06'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    display: none;
   }
 
   .hero-content {
@@ -230,9 +233,9 @@
 
   .hero-text .badge {
     display: inline-block;
-    background: rgba(201,168,76,0.2);
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
+    background: var(--gold-pale);
+    border: 1px solid rgba(201,168,76,0.45);
+    color: var(--gold-dark);
     font-size: 11px;
     letter-spacing: 4px;
     padding: 6px 18px;
@@ -244,18 +247,18 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(42px, 5vw, 72px);
     font-weight: 300;
-    color: var(--white);
+    color: var(--deep-green);
     line-height: 1.15;
     margin-bottom: 20px;
   }
 
   .hero-text h1 em {
     font-style: italic;
-    color: var(--gold-light);
+    color: var(--gold-dark);
   }
 
   .hero-text p {
-    color: rgba(255,255,255,0.75);
+    color: var(--text-mid);
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 22px;
@@ -267,9 +270,9 @@
     align-items: center;
     max-width: 480px;
     margin-bottom: 28px;
-    background: rgba(255,255,255,0.96);
-    border: 1px solid rgba(232,201,109,0.7);
-    box-shadow: 0 16px 38px rgba(0,0,0,0.18);
+    background: var(--white);
+    border: 1px solid rgba(201,168,76,0.35);
+    box-shadow: 0 16px 36px rgba(13,61,46,0.08);
   }
 
   .hero-search input {
@@ -325,7 +328,7 @@
 
   .btn-outline-gold {
     background: transparent;
-    color: var(--gold-light);
+    color: var(--deep-green);
     border: 1px solid var(--gold);
     padding: 14px 32px;
     font-family: 'Cinzel', serif;
@@ -338,7 +341,7 @@
   }
 
   .btn-outline-gold:hover {
-    background: rgba(201,168,76,0.1);
+    background: var(--gold-pale);
     transform: translateY(-2px);
   }
 
@@ -347,19 +350,19 @@
     gap: 32px;
     margin-top: 48px;
     padding-top: 32px;
-    border-top: 1px solid rgba(201,168,76,0.25);
+    border-top: 1px solid rgba(201,168,76,0.35);
   }
 
   .hero-stat .num {
     font-family: 'Cinzel', serif;
     font-size: 28px;
-    color: var(--gold-light);
+    color: var(--gold-dark);
     font-weight: 600;
   }
 
   .hero-stat .label {
     font-size: 11px;
-    color: rgba(255,255,255,0.55);
+    color: var(--text-light);
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-top: 2px;
@@ -378,6 +381,8 @@
     overflow: hidden;
     position: relative;
     cursor: pointer;
+    border: 1px solid rgba(201,168,76,0.28);
+    box-shadow: 0 18px 42px rgba(13,61,46,0.1);
   }
 
   .hero-img-card:first-child {
@@ -394,18 +399,18 @@
     position: relative;
   }
 
-  .img-p-1 { background: linear-gradient(160deg, #2d6e52 0%, #1a4a35 100%); }
-  .img-p-2 { background: linear-gradient(160deg, #4a2d6e 0%, #2d1a4a 100%); }
-  .img-p-3 { background: linear-gradient(160deg, #6e4a2d 0%, #4a2d1a 100%); }
+  .img-p-1 { background: linear-gradient(160deg, #fff8e8 0%, #d8eadf 100%); }
+  .img-p-2 { background: linear-gradient(160deg, #fff4f8 0%, #f2d7e3 100%); }
+  .img-p-3 { background: linear-gradient(160deg, #fff8ec 0%, #ead6b4 100%); }
 
   .img-label {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(255,248,236,0.92) 0%, rgba(255,248,236,0) 100%);
     padding: 20px 16px 14px;
-    color: white;
+    color: var(--deep-green);
     font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     font-style: italic;
@@ -1762,19 +1767,43 @@
   }
 
   @media (max-width: 600px) {
-    .header-inner { padding: 0 16px; }
-    .logo-wrap { gap: 10px; }
+    .header-inner {
+      height: 68px;
+      padding: 0 14px;
+      justify-content: space-between;
+    }
+    .logo-wrap {
+      gap: 0;
+      z-index: 2;
+    }
     .logo-icon {
       width: 42px;
       height: 42px;
     }
     .logo-text {
-      font-size: 19px;
-      letter-spacing: 2px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 23px;
+      letter-spacing: 1.4px;
+      white-space: nowrap;
+      pointer-events: none;
     }
     .logo-sub {
       font-size: 10px;
       letter-spacing: 3px;
+    }
+    .header-actions {
+      gap: 12px;
+      z-index: 2;
+    }
+    .mobile-search-btn {
+      display: flex;
+    }
+    .wishlist-btn-header,
+    .whatsapp-btn {
+      display: none;
     }
     .footer-top { grid-template-columns: 1fr; }
     .insta-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1808,7 +1837,7 @@
 
     .logo-wrap {
       min-width: 0;
-      gap: 7px;
+      gap: 0;
     }
 
     .logo-icon {
@@ -1820,8 +1849,8 @@
     .logo-icon img { padding: 4px; }
 
     .logo-text {
-      font-size: 16px;
-      letter-spacing: 1.4px;
+      font-size: 20px;
+      letter-spacing: 1px;
       white-space: nowrap;
     }
 
@@ -2053,11 +2082,14 @@
     </nav>
 
     <div class="header-actions">
+      <button class="icon-btn mobile-search-btn" onclick="focusHeroSearch()" title="Search">
+        🔍
+      </button>
       <button class="icon-btn" onclick="openCart()" title="Cart">
         🛒
         <span class="cart-badge" id="cart-count">3</span>
       </button>
-      <button class="icon-btn" title="Wishlist">❤️</button>
+      <button class="icon-btn wishlist-btn-header" title="Wishlist">❤️</button>
       <button class="whatsapp-btn" onclick="window.open('https://wa.me/919876543210','_blank')">
         💬 Chat
       </button>
@@ -2906,6 +2938,17 @@
 
     renderProducts('collections-grid', filtered);
     showPage('collections');
+  }
+
+  function focusHeroSearch() {
+    showPage('home');
+    setTimeout(() => {
+      const input = document.getElementById('hero-search-input');
+      if (input) {
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        input.focus();
+      }
+    }, 120);
   }
 
   let activeVideoSlide = 0;
