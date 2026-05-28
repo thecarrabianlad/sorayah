@@ -167,6 +167,28 @@
     display: none;
   }
 
+  .search-icon {
+    width: 17px;
+    height: 17px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+
+  .search-icon::after {
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 2px;
+    background: currentColor;
+    right: -5px;
+    bottom: -3px;
+    transform: rotate(45deg);
+    transform-origin: center;
+    border-radius: 2px;
+  }
+
   .cart-badge {
     position: absolute;
     top: 2px;
@@ -182,6 +204,25 @@
     align-items: center;
     justify-content: center;
   }
+
+  .account-initial {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background: var(--gold);
+    color: var(--deep-green);
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 999px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .account-initial.visible { display: flex; }
 
   .whatsapp-btn {
     background: var(--deep-green);
@@ -399,6 +440,17 @@
     position: relative;
   }
 
+  .hero-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .img-p-1 > div[style] {
+    display: none;
+  }
+
   .img-p-1 { background: linear-gradient(160deg, #fff8e8 0%, #d8eadf 100%); }
   .img-p-2 { background: linear-gradient(160deg, #fff4f8 0%, #f2d7e3 100%); }
   .img-p-3 { background: linear-gradient(160deg, #fff8ec 0%, #ead6b4 100%); }
@@ -420,6 +472,10 @@
     font-size: 60px;
     margin-bottom: 8px;
     opacity: 0.4;
+  }
+
+  .hero-mobile-options {
+    display: none;
   }
 
   /* ===== OFFER BANNER ===== */
@@ -718,7 +774,30 @@
     transition: transform 0.4s;
   }
 
-  .product-card:hover .prod-img-placeholder { transform: scale(1.04); }
+  .product-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+
+  .product-image-empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #fdf8f0 0%, #e8f5ef 100%);
+    color: var(--gold-dark);
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .product-card:hover .prod-img-placeholder,
+  .product-card:hover .product-photo { transform: scale(1.04); }
 
   .pi-1 { background: linear-gradient(145deg, #1a4a35 0%, #0d3d2e 100%); }
   .pi-2 { background: linear-gradient(145deg, #3d1a4a 0%, #2d0d3d 100%); }
@@ -1440,6 +1519,394 @@
 
   .modal-body p { margin-bottom: 14px; }
 
+  /* ===== AUTH PAGE ===== */
+  .auth-page {
+    display: none;
+    min-height: calc(100vh - 72px);
+    background:
+      linear-gradient(135deg, rgba(13,61,46,0.92), rgba(26,92,68,0.72)),
+      url('hero-mobile.png') center bottom / cover no-repeat;
+    padding: 72px 24px;
+  }
+
+  .auth-shell {
+    width: min(980px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr);
+    background: rgba(253,248,240,0.96);
+    border: 1px solid rgba(232,201,109,0.45);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+  }
+
+  .auth-story {
+    padding: 54px 48px;
+    background: var(--deep-green);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .auth-story::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(201,168,76,0.18), transparent 58%);
+    pointer-events: none;
+  }
+
+  .auth-story > * { position: relative; z-index: 1; }
+
+  .auth-kicker {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-light);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .auth-story h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 18px;
+  }
+
+  .auth-story h2 em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .auth-story p {
+    max-width: 460px;
+    color: rgba(255,255,255,0.74);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .auth-panel {
+    padding: 44px 38px;
+    background: var(--white);
+  }
+
+  .auth-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  .auth-tab {
+    border: none;
+    background: transparent;
+    color: var(--deep-green);
+    padding: 12px 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+  }
+
+  .auth-tab.active {
+    background: var(--deep-green);
+    color: var(--gold-light);
+  }
+
+  .auth-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    color: var(--deep-green);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .auth-copy {
+    color: var(--text-light);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .auth-field {
+    margin-bottom: 14px;
+  }
+
+  .auth-field label {
+    display: block;
+    font-family: 'Cinzel', serif;
+    color: var(--gold-dark);
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .auth-field input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    color: var(--text-dark);
+    padding: 14px 16px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .auth-field input:focus {
+    border-color: var(--gold);
+    background: var(--white);
+  }
+
+  .auth-submit-btn {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--deep-green);
+    color: var(--gold-light);
+    padding: 14px 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .auth-submit-btn:hover {
+    background: var(--gold);
+    color: var(--deep-green);
+    border-color: var(--gold);
+  }
+
+  .auth-secondary-btn {
+    background: var(--cream);
+    color: var(--deep-green);
+    margin-top: 12px;
+  }
+
+  .auth-status {
+    margin-top: 18px;
+    padding: 14px;
+    background: var(--light-green);
+    color: var(--deep-green);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .auth-status.visible { display: block; }
+
+  .auth-user-card {
+    display: none;
+    border: 1px solid var(--border);
+    background: var(--gold-pale);
+    padding: 20px;
+    margin-bottom: 22px;
+  }
+
+  .auth-user-card.visible { display: block; }
+
+  .auth-user-name {
+    font-family: 'Cinzel', serif;
+    color: var(--deep-green);
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .auth-user-email {
+    color: var(--text-mid);
+    font-size: 13px;
+  }
+
+  .product-detail-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 3600;
+    background: rgba(0,0,0,0.55);
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  .product-detail-overlay.open { display: block; }
+
+  .product-detail-modal {
+    width: min(980px, 100%);
+    margin: 24px auto;
+    background: var(--white);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+    position: relative;
+  }
+
+  .product-detail-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    color: var(--deep-green);
+    cursor: pointer;
+    font-size: 22px;
+  }
+
+  .product-gallery {
+    min-height: 560px;
+    background: var(--light-green);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-gallery-track {
+    height: 100%;
+    display: flex;
+    transition: transform 0.35s ease;
+  }
+
+  .product-gallery-slide {
+    min-width: 100%;
+    height: 100%;
+  }
+
+  .product-gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .product-gallery-empty {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-dark);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    color: var(--deep-green);
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  .gallery-arrow.prev { left: 14px; }
+  .gallery-arrow.next { right: 14px; }
+
+  .gallery-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .gallery-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: rgba(255,255,255,0.72);
+    cursor: pointer;
+  }
+
+  .gallery-dot.active { background: var(--gold); }
+
+  .product-detail-info {
+    padding: 54px 34px 34px;
+  }
+
+  .product-detail-category {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-dark);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .product-detail-title {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--deep-green);
+    font-size: 34px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .product-detail-desc {
+    color: var(--text-mid);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .product-detail-price {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .product-detail-price .price { font-size: 24px; }
+
+  @media (max-width: 760px) {
+    .product-detail-overlay { padding: 0; }
+    .product-detail-modal {
+      min-height: 100vh;
+      margin: 0;
+      grid-template-columns: 1fr;
+    }
+    .product-gallery {
+      min-height: 430px;
+      height: 58vh;
+    }
+    .product-detail-info {
+      padding: 30px 20px 28px;
+    }
+    .product-detail-title { font-size: 30px; }
+    .auth-page {
+      padding: 0;
+      min-height: auto;
+    }
+    .auth-shell {
+      min-height: calc(100vh - 64px);
+      grid-template-columns: 1fr;
+    }
+    .auth-story {
+      padding: 36px 22px;
+    }
+    .auth-story h2 {
+      font-size: 38px;
+    }
+    .auth-panel {
+      padding: 30px 20px 34px;
+    }
+  }
+
   /* ===== CART DRAWER ===== */
   .cart-drawer {
     position: fixed;
@@ -1807,9 +2274,102 @@
     }
     .footer-top { grid-template-columns: 1fr; }
     .insta-grid { grid-template-columns: repeat(3, 1fr); }
-    .hero-search { max-width: 100%; }
-    .hero-search input { padding: 14px; }
-    .hero-search button { padding: 0 16px; }
+    .hero {
+      min-height: auto;
+      background: var(--deep-green);
+    }
+    .hero-content {
+      display: block;
+      max-width: none;
+      padding: 0;
+      position: relative;
+    }
+    .hero-text {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 26px 18px 30px;
+      background: linear-gradient(180deg, rgba(13,61,46,0.08) 0%, rgba(13,61,46,0.12) 42%, rgba(13,61,46,0.9) 100%);
+      animation: none !important;
+      transform: none !important;
+    }
+    .hero-text .badge {
+      width: fit-content;
+      background: rgba(253,248,240,0.88);
+      border-color: rgba(255,255,255,0.5);
+      color: var(--deep-green);
+      font-size: 9px;
+      letter-spacing: 2px;
+      padding: 6px 12px;
+      margin-bottom: 12px;
+    }
+    .hero-text h1 {
+      color: var(--white);
+      font-size: 42px;
+      line-height: 1.03;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.2);
+    }
+    .hero-text h1 em { color: var(--gold-light); }
+    .hero-text p {
+      color: rgba(255,255,255,0.88);
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 310px;
+      margin-bottom: 18px;
+    }
+    .hero-search,
+    .hero-ctas,
+    .hero-stats {
+      display: none;
+    }
+    .hero-mobile-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .hero-mobile-options button {
+      min-width: 0;
+      border: 1px solid rgba(232,201,109,0.72);
+      background: rgba(253,248,240,0.94);
+      color: var(--deep-green);
+      padding: 12px 8px;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .hero-image-grid {
+      display: block;
+      height: calc(100svh - 120px);
+      min-height: 560px;
+      max-height: 760px;
+      animation: none !important;
+      transform: none !important;
+    }
+    .hero-img-card {
+      height: 100%;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .hero-img-card:not(:first-child) {
+      display: none;
+    }
+    .hero-img-placeholder {
+      height: 100%;
+      background: var(--deep-green);
+    }
+    .hero-main-img {
+      object-position: center bottom;
+    }
+    .hero-img-card:first-child .img-label {
+      display: none;
+    }
     .video-stories { padding: 64px 16px; }
     .video-slide { padding: 0 52px; }
     .video-nav {
@@ -1946,8 +2506,52 @@
     .hero-stat .label { font-size: 9px; letter-spacing: 1px; }
 
     .hero-image-grid {
-      height: 260px;
-      gap: 8px;
+      height: calc(100svh - 100px);
+      min-height: 500px;
+      max-height: 700px;
+      gap: 0;
+    }
+
+    .hero-content {
+      padding: 0;
+      gap: 0;
+    }
+
+    .hero-text {
+      padding: 22px 14px 24px;
+    }
+
+    .hero-text .badge {
+      margin-bottom: 10px;
+    }
+
+    .hero-text h1 {
+      color: var(--white);
+      font-size: 36px;
+      line-height: 1.03;
+      margin-bottom: 10px;
+    }
+
+    .hero-text p {
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 16px;
+    }
+
+    .hero-search,
+    .hero-ctas,
+    .hero-stats {
+      display: none;
+    }
+
+    .hero-mobile-options {
+      display: grid;
+      gap: 7px;
+    }
+
+    .hero-mobile-options button {
+      padding: 11px 6px;
+      font-size: 10px;
+      letter-spacing: 0.8px;
     }
 
     .categories,
@@ -2082,8 +2686,12 @@
     </nav>
 
     <div class="header-actions">
+      <button class="icon-btn" onclick="showPage('auth')" title="Account">
+        ♙
+        <span class="account-initial" id="account-initial"></span>
+      </button>
       <button class="icon-btn mobile-search-btn" onclick="focusHeroSearch()" title="Search">
-        🔍
+        <span class="search-icon" aria-hidden="true"></span>
       </button>
       <button class="icon-btn" onclick="openCart()" title="Cart">
         🛒
@@ -2113,11 +2721,16 @@
           <p>Handcrafted Banarasi, Organza, Silk, and Kanjivaram sarees for every celebration.</p>
           <form class="hero-search" onsubmit="searchProducts(event)">
             <input type="search" id="hero-search-input" placeholder="Search sarees, fabrics, occasions..." aria-label="Search sarees">
-            <button type="submit" title="Search">🔍</button>
+            <button type="submit" title="Search"><span class="search-icon" aria-hidden="true"></span></button>
           </form>
           <div class="hero-ctas">
             <button class="btn-gold" onclick="showPage('collections')">EXPLORE COLLECTION</button>
             <button class="btn-outline-gold" onclick="showPage('categories')">SHOP BY CATEGORY</button>
+          </div>
+          <div class="hero-mobile-options" aria-label="Featured shopping options">
+            <button onclick="filterProducts('Bridal'); showPage('collections')">Bridal</button>
+            <button onclick="filterProducts('Silk'); showPage('collections')">Silk</button>
+            <button onclick="filterProducts('Organza'); showPage('collections')">Organza</button>
           </div>
           <div class="hero-stats">
             <div class="hero-stat">
@@ -2137,6 +2750,7 @@
         <div class="hero-image-grid fade-in-up">
           <div class="hero-img-card">
             <div class="hero-img-placeholder img-p-1">
+              <img class="hero-main-img" src="hero-mobile.png" alt="Emerald silk saree with antique gold zari draped in a boutique studio">
               <div style="font-size:72px;opacity:0.35">🥻</div>
               <div class="img-label">Bridal Banarasi</div>
             </div>
@@ -2768,6 +3382,45 @@
     </div>
   </div>
 
+  <!-- ===== AUTH PAGE ===== -->
+  <div id="page-auth" class="auth-page">
+    <div class="auth-shell">
+      <div class="auth-story">
+        <div class="auth-kicker">Sorayah Account</div>
+        <h2>Your private <em>atelier</em> for every drape</h2>
+        <p>Sign in to save your wishlist, keep your bag ready, and make checkout smoother when your perfect saree finds you.</p>
+      </div>
+      <div class="auth-panel">
+        <div class="auth-tabs" aria-label="Account mode">
+          <button class="auth-tab active" id="auth-login-tab" type="button" onclick="setAuthMode('login')">Login</button>
+          <button class="auth-tab" id="auth-signup-tab" type="button" onclick="setAuthMode('signup')">Sign Up</button>
+        </div>
+
+        <div class="auth-user-card" id="auth-user-card">
+          <div class="auth-user-name" id="auth-user-name"></div>
+          <div class="auth-user-email" id="auth-user-email"></div>
+        </div>
+
+        <h2 class="auth-heading" id="auth-heading">Welcome back</h2>
+        <p class="auth-copy" id="auth-copy">Enter your email and we will send a secure login link.</p>
+
+        <form id="auth-email-form" onsubmit="sendMagicLink(event)">
+          <div class="auth-field">
+            <label for="auth-email">Email Address</label>
+            <input id="auth-email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <button class="auth-submit-btn" id="auth-submit-btn" type="submit">Send Login Link</button>
+        </form>
+
+        <button class="auth-submit-btn auth-secondary-btn" id="sign-out-btn" type="button" onclick="signOut()" style="display:none;">
+          Sign Out
+        </button>
+
+        <div class="auth-status" id="auth-status"></div>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <!-- FOOTER -->
@@ -2883,22 +3536,224 @@
 </div>
 <div id="cart-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:2999;" onclick="closeCart()"></div>
 
+<!-- PRODUCT DETAILS -->
+<div class="product-detail-overlay" id="product-detail-overlay" onclick="closeProductDetail()">
+  <div class="product-detail-modal" onclick="event.stopPropagation()">
+    <button class="product-detail-close" type="button" onclick="closeProductDetail()" title="Close">×</button>
+    <div class="product-gallery">
+      <div class="product-gallery-track" id="product-gallery-track"></div>
+      <button class="gallery-arrow prev" type="button" onclick="moveProductImage(-1)" title="Previous image">‹</button>
+      <button class="gallery-arrow next" type="button" onclick="moveProductImage(1)" title="Next image">›</button>
+      <div class="gallery-dots" id="product-gallery-dots"></div>
+    </div>
+    <div class="product-detail-info">
+      <div class="product-detail-category" id="detail-category"></div>
+      <h2 class="product-detail-title" id="detail-name"></h2>
+      <p class="product-detail-desc" id="detail-desc"></p>
+      <div class="product-detail-price">
+        <span class="price" id="detail-price"></span>
+        <span class="price-old" id="detail-old-price"></span>
+      </div>
+      <button class="checkout-btn" id="detail-add-btn" type="button">ADD TO BAG</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  const products = [
-    { id:1, name:"Royal Zari Banarasi", cat:"Banarasi", desc:"Handwoven pure silk with intricate zari motifs", price:"₹8,499", old:"₹11,999", badge:"hot", img:"pi-1", emoji:"🥻" },
-    { id:2, name:"Floral Organza Dream", cat:"Organza", desc:"Lightweight organza with delicate floral embroidery", price:"₹4,299", old:"₹5,999", badge:"new", img:"pi-2", emoji:"🌸" },
-    { id:3, name:"Kanjivaram Temple", cat:"Kanjivaram", desc:"Traditional temple border design in pure Kanjivaram silk", price:"₹12,999", old:"", badge:"", img:"pi-3", emoji:"🥻" },
-    { id:4, name:"Peacock Silk Saree", cat:"Silk", desc:"Vibrant peacock motifs on rich Mysore silk", price:"₹6,799", old:"₹8,999", badge:"sale", img:"pi-4", emoji:"🦚" },
-    { id:5, name:"Bridal Lehenga Saree", cat:"Bridal", desc:"Heavy embroidered bridal saree with blouse", price:"₹18,999", old:"", badge:"new", img:"pi-5", emoji:"💎" },
-    { id:6, name:"Chiffon Garden Saree", cat:"Chiffon", desc:"Soft chiffon with floral print, perfect for parties", price:"₹2,499", old:"₹3,499", badge:"hot", img:"pi-6", emoji:"🌺" },
+  const SUPABASE_CONFIG = {
+    url: 'https://ksjtvpybdlrhqalzsacq.supabase.co',
+    anonKey: 'sb_publishable_yfnZYl3U7mGEK1PKMdIOhw_wWSbG06K',
+    productsTable: 'products'
+  };
+
+  const fallbackProducts = [
+    { id:1, name:"Royal Zari Banarasi", cat:"Banarasi", desc:"Handwoven pure silk with intricate zari motifs", price:"₹8,499", old:"₹11,999", badge:"hot", img:"pi-1", images:["hero-mobile.png"] },
+    { id:2, name:"Floral Organza Dream", cat:"Organza", desc:"Lightweight organza with delicate floral embroidery", price:"₹4,299", old:"₹5,999", badge:"new", img:"pi-2", images:["hero-mobile.png"] },
+    { id:3, name:"Kanjivaram Temple", cat:"Kanjivaram", desc:"Traditional temple border design in pure Kanjivaram silk", price:"₹12,999", old:"", badge:"", img:"pi-3", images:["hero-mobile.png"] },
+    { id:4, name:"Peacock Silk Saree", cat:"Silk", desc:"Vibrant peacock motifs on rich Mysore silk", price:"₹6,799", old:"₹8,999", badge:"sale", img:"pi-4", images:["hero-mobile.png"] },
+    { id:5, name:"Bridal Lehenga Saree", cat:"Bridal", desc:"Heavy embroidered bridal saree with blouse", price:"₹18,999", old:"", badge:"new", img:"pi-5", images:["hero-mobile.png"] },
+    { id:6, name:"Chiffon Garden Saree", cat:"Chiffon", desc:"Soft chiffon with floral print, perfect for parties", price:"₹2,499", old:"₹3,499", badge:"hot", img:"pi-6", images:["hero-mobile.png"] },
   ];
+
+  let products = [...fallbackProducts];
+  let activeCategory = 'All';
+  let activeDetailProduct = null;
+  let activeProductImage = 0;
+  let supabaseClient = null;
+  let authMode = 'login';
+  let currentUser = null;
+
+  async function getSupabaseClient() {
+    if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) return null;
+    if (supabaseClient) return supabaseClient;
+
+    const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+    supabaseClient = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+    return supabaseClient;
+  }
+
+  function normalizeProduct(row, index) {
+    const price = row.price_display || row.price || row.price_inr || row.amount || '';
+    const oldPrice = row.old_price_display || row.old || row.compare_at_price || row.mrp || '';
+    const images = [
+      row.image_url,
+      row.image_url_2,
+      row.image_url_3,
+      row.image_url_4
+    ].filter(Boolean).slice(0, 4);
+
+    return {
+      id: row.id || index + 1,
+      name: row.name || row.title || 'Untitled Saree',
+      cat: row.cat || row.category || row.collection || 'Saree',
+      desc: row.desc || row.description || row.short_description || '',
+      price: typeof price === 'number' ? `₹${price.toLocaleString('en-IN')}` : price,
+      old: typeof oldPrice === 'number' ? `₹${oldPrice.toLocaleString('en-IN')}` : oldPrice,
+      badge: row.badge || '',
+      img: row.img || row.image_class || `pi-${(index % 6) + 1}`,
+      images
+    };
+  }
+
+  async function loadProductsFromSupabase() {
+    const client = await getSupabaseClient();
+    if (!client) return products;
+
+    const { data, error } = await client
+      .from(SUPABASE_CONFIG.productsTable)
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.warn('Supabase products load failed; using local fallback.', error);
+      return products;
+    }
+
+    if (Array.isArray(data) && data.length) {
+      products = data.map(normalizeProduct);
+    }
+
+    return products;
+  }
+
+  function setAuthMode(mode) {
+    authMode = mode;
+    document.getElementById('auth-login-tab').classList.toggle('active', mode === 'login');
+    document.getElementById('auth-signup-tab').classList.toggle('active', mode === 'signup');
+    document.getElementById('auth-heading').textContent = mode === 'login' ? 'Welcome back' : 'Create your account';
+    document.getElementById('auth-copy').textContent = mode === 'login'
+      ? 'Enter your email and we will send a secure login link.'
+      : 'Enter your email to create a Sorayah account with a secure link.';
+    document.getElementById('auth-submit-btn').textContent = mode === 'login'
+      ? 'Send Login Link'
+      : 'Send Sign Up Link';
+  }
+
+  function setAuthStatus(message) {
+    const status = document.getElementById('auth-status');
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle('visible', Boolean(message));
+  }
+
+  function renderAuthState(user) {
+    currentUser = user || null;
+    const userCard = document.getElementById('auth-user-card');
+    const nameEl = document.getElementById('auth-user-name');
+    const emailEl = document.getElementById('auth-user-email');
+    const authForm = document.getElementById('auth-email-form');
+    const signOutBtn = document.getElementById('sign-out-btn');
+    const initial = document.getElementById('account-initial');
+
+    if (user) {
+      const displayName = user.user_metadata?.full_name || user.user_metadata?.name || 'Sorayah Member';
+      const email = user.email || '';
+      userCard.classList.add('visible');
+      nameEl.textContent = displayName;
+      emailEl.textContent = email;
+      authForm.style.display = 'none';
+      signOutBtn.style.display = 'flex';
+      initial.textContent = (displayName || email || 'S').charAt(0).toUpperCase();
+      initial.classList.add('visible');
+      setAuthStatus('You are signed in.');
+    } else {
+      userCard.classList.remove('visible');
+      nameEl.textContent = '';
+      emailEl.textContent = '';
+      authForm.style.display = 'block';
+      signOutBtn.style.display = 'none';
+      initial.textContent = '';
+      initial.classList.remove('visible');
+      setAuthStatus('');
+    }
+  }
+
+  async function sendMagicLink(event) {
+    event.preventDefault();
+    const client = await getSupabaseClient();
+    if (!client) {
+      setAuthStatus('Add your Supabase URL and publishable key before enabling email login.');
+      return;
+    }
+
+    const email = document.getElementById('auth-email').value.trim();
+    if (!email) return;
+
+    setAuthStatus('Sending secure link...');
+    const { error } = await client.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: window.location.origin + window.location.pathname + '#auth',
+        shouldCreateUser: true
+      }
+    });
+
+    if (error) {
+      setAuthStatus(error.message);
+      return;
+    }
+
+    setAuthStatus(`Check ${email} for your secure sign-in link.`);
+  }
+
+  async function signOut() {
+    const client = await getSupabaseClient();
+    if (!client) return;
+
+    const { error } = await client.auth.signOut();
+    if (error) {
+      setAuthStatus(error.message);
+      return;
+    }
+
+    renderAuthState(null);
+    setAuthStatus('Signed out.');
+  }
+
+  async function initAuth() {
+    const client = await getSupabaseClient();
+    if (!client) return;
+
+    const { data } = await client.auth.getSession();
+    renderAuthState(data.session?.user || null);
+    client.auth.onAuthStateChange((_event, session) => {
+      renderAuthState(session?.user || null);
+    });
+
+    if (window.location.hash === '#auth') {
+      showPage('auth');
+      history.replaceState(null, '', window.location.pathname);
+    }
+  }
 
   function renderProducts(containerId, data) {
     const grid = document.getElementById(containerId);
     grid.innerHTML = data.map(p => `
-      <div class="product-card">
+      <div class="product-card" onclick="openProductDetail('${p.id}')">
         <div class="product-image">
-          <div class="prod-img-placeholder ${p.img}" style="font-size:72px;">${p.emoji}</div>
+          ${p.images && p.images.length
+            ? `<img class="product-photo" src="${p.images[0]}" alt="${p.name}">`
+            : `<div class="product-image-empty ${p.img}">Image coming soon</div>`}
           ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badge.toUpperCase()}</span>` : ''}
           <button class="wishlist-btn">♡</button>
         </div>
@@ -2911,25 +3766,23 @@
               <span class="price">${p.price}</span>
               ${p.old ? `<span class="price-old">${p.old}</span>` : ''}
             </div>
-            <button class="add-cart-btn" onclick="addToCart(event)">ADD TO BAG</button>
+            <button class="add-cart-btn" onclick="addToCart(event, '${p.id}')">ADD TO BAG</button>
           </div>
         </div>
       </div>
     `).join('');
   }
 
-  renderProducts('products-grid', products);
-  renderProducts('collections-grid', [...products, ...products]);
-
   function filterProducts(cat) {
-    const filtered = cat === 'All' ? [...products, ...products] : products.filter(p => p.cat === cat);
+    activeCategory = cat;
+    const filtered = cat === 'All' ? products : products.filter(p => p.cat === cat);
     renderProducts('collections-grid', filtered);
   }
 
   function searchProducts(e) {
     e.preventDefault();
     const query = document.getElementById('hero-search-input').value.trim().toLowerCase();
-    const catalog = [...products, ...products];
+    const catalog = products;
     const filtered = query
       ? catalog.filter(p =>
           `${p.name} ${p.cat} ${p.desc}`.toLowerCase().includes(query)
@@ -3088,8 +3941,12 @@
     setVideoSlide(0);
   }
 
-  function addToCart(e) {
+  function addToCart(e, productId) {
     e.stopPropagation();
+    const product = products.find(p => String(p.id) === String(productId));
+    if (product) {
+      console.log('Added to bag:', product);
+    }
     const btn = e.target;
     btn.textContent = '✓ ADDED';
     btn.style.background = 'var(--gold)';
@@ -3097,8 +3954,62 @@
     setTimeout(() => { btn.textContent = 'ADD TO BAG'; btn.style.background=''; btn.style.color=''; }, 2000);
   }
 
+  function renderProductGallery() {
+    const track = document.getElementById('product-gallery-track');
+    const dots = document.getElementById('product-gallery-dots');
+    if (!track || !dots || !activeDetailProduct) return;
+
+    const images = activeDetailProduct.images || [];
+    track.innerHTML = images.length
+      ? images.map(src => `
+          <div class="product-gallery-slide">
+            <img src="${src}" alt="${activeDetailProduct.name}">
+          </div>
+        `).join('')
+      : '<div class="product-gallery-slide"><div class="product-gallery-empty">Image coming soon</div></div>';
+
+    dots.innerHTML = images.map((_, index) => `
+      <button class="gallery-dot${index === activeProductImage ? ' active' : ''}" type="button" onclick="setProductImage(${index})" title="Image ${index + 1}"></button>
+    `).join('');
+
+    track.style.transform = `translateX(-${activeProductImage * 100}%)`;
+    document.querySelectorAll('.gallery-dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === activeProductImage);
+    });
+  }
+
+  function setProductImage(index) {
+    const imageCount = activeDetailProduct?.images?.length || 1;
+    activeProductImage = (index + imageCount) % imageCount;
+    renderProductGallery();
+  }
+
+  function moveProductImage(direction) {
+    setProductImage(activeProductImage + direction);
+  }
+
+  function openProductDetail(productId) {
+    const product = products.find(p => String(p.id) === String(productId));
+    if (!product) return;
+
+    activeDetailProduct = product;
+    activeProductImage = 0;
+    document.getElementById('detail-category').textContent = product.cat;
+    document.getElementById('detail-name').textContent = product.name;
+    document.getElementById('detail-desc').textContent = product.desc;
+    document.getElementById('detail-price').textContent = product.price;
+    document.getElementById('detail-old-price').textContent = product.old || '';
+    document.getElementById('detail-add-btn').onclick = event => addToCart(event, product.id);
+    renderProductGallery();
+    document.getElementById('product-detail-overlay').classList.add('open');
+  }
+
+  function closeProductDetail() {
+    document.getElementById('product-detail-overlay').classList.remove('open');
+  }
+
   function showPage(page) {
-    const allPages = ['home','collections','track','contact','about','return','privacy','shipping','offers','categories'];
+    const allPages = ['home','collections','track','contact','about','return','privacy','shipping','offers','categories','auth'];
     allPages.forEach(p => {
       const el = document.getElementById('page-' + p);
       if(el) el.style.display = 'none';
@@ -3131,13 +4042,23 @@
   // Wishlist toggle
   document.addEventListener('click', function(e) {
     if(e.target.classList.contains('wishlist-btn')) {
+      e.stopPropagation();
       const btn = e.target;
       if(btn.textContent === '♡') { btn.textContent = '♥'; btn.style.color = '#c0392b'; }
       else { btn.textContent = '♡'; btn.style.color = ''; }
     }
   });
 
+  async function initStore() {
+    await loadProductsFromSupabase();
+    renderProducts('products-grid', products.slice(0, 6));
+    filterProducts(activeCategory);
+  }
+
   initVideoStories();
+  setAuthMode('login');
+  initAuth();
+  initStore();
 </script>
 </body>
 </html>
