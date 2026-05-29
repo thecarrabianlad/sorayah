@@ -1687,6 +1687,14 @@
     margin-top: 12px;
   }
 
+  .auth-form-panel {
+    display: none;
+  }
+
+  .auth-form-panel.active {
+    display: block;
+  }
+
   .auth-status {
     margin-top: 18px;
     padding: 14px;
@@ -3402,14 +3410,27 @@
         </div>
 
         <h2 class="auth-heading" id="auth-heading">Welcome back</h2>
-        <p class="auth-copy" id="auth-copy">Enter your email and we will send a secure login link.</p>
+        <p class="auth-copy" id="auth-copy">Enter your phone number and we will send a secure OTP.</p>
 
-        <form id="auth-email-form" onsubmit="sendMagicLink(event)">
-          <div class="auth-field">
-            <label for="auth-email">Email Address</label>
-            <input id="auth-email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <form class="auth-form-panel active" id="auth-phone-form" onsubmit="sendPhoneOtp(event)">
+          <div class="auth-field" id="auth-name-field" style="display:none;">
+            <label for="auth-name">Full Name</label>
+            <input id="auth-name" type="text" placeholder="Your name" autocomplete="name">
           </div>
-          <button class="auth-submit-btn" id="auth-submit-btn" type="submit">Send Login Link</button>
+          <div class="auth-field">
+            <label for="auth-phone">Phone Number</label>
+            <input id="auth-phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel">
+          </div>
+          <button class="auth-submit-btn" id="phone-submit-btn" type="submit">Send OTP</button>
+        </form>
+
+        <form class="auth-form-panel" id="auth-otp-form" onsubmit="verifyPhoneOtp(event)">
+          <div class="auth-field">
+            <label for="auth-otp">OTP Code</label>
+            <input id="auth-otp" type="text" inputmode="numeric" placeholder="Enter 6-digit OTP" autocomplete="one-time-code">
+          </div>
+          <button class="auth-submit-btn" type="submit">Verify OTP</button>
+          <button class="auth-submit-btn auth-secondary-btn" type="button" onclick="setLoginMethod('phone')">Change Phone Number</button>
         </form>
 
         <button class="auth-submit-btn auth-secondary-btn" id="sign-out-btn" type="button" onclick="signOut()" style="display:none;">
@@ -3582,6 +3603,7 @@
   let supabaseClient = null;
   let authMode = 'login';
   let currentUser = null;
+  let pendingPhone = '';
 
   async function getSupabaseClient() {
     if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) return null;
@@ -3642,11 +3664,18 @@
     document.getElementById('auth-signup-tab').classList.toggle('active', mode === 'signup');
     document.getElementById('auth-heading').textContent = mode === 'login' ? 'Welcome back' : 'Create your account';
     document.getElementById('auth-copy').textContent = mode === 'login'
-      ? 'Enter your email and we will send a secure login link.'
-      : 'Enter your email to create a Sorayah account with a secure link.';
-    document.getElementById('auth-submit-btn').textContent = mode === 'login'
-      ? 'Send Login Link'
-      : 'Send Sign Up Link';
+      ? 'Enter your phone number and we will send a secure OTP.'
+      : 'Enter your phone number to create your Sorayah account.';
+    document.getElementById('auth-name-field').style.display = mode === 'signup' ? 'block' : 'none';
+    setLoginMethod('phone');
+  }
+
+  function setLoginMethod(method) {
+    const showPhone = method === 'phone';
+    const showOtp = method === 'otp';
+
+    document.getElementById('auth-phone-form').classList.toggle('active', showPhone);
+    document.getElementById('auth-otp-form').classList.toggle('active', showOtp);
   }
 
   function setAuthStatus(message) {
@@ -3661,7 +3690,8 @@
     const userCard = document.getElementById('auth-user-card');
     const nameEl = document.getElementById('auth-user-name');
     const emailEl = document.getElementById('auth-user-email');
-    const authForm = document.getElementById('auth-email-form');
+    const phoneForm = document.getElementById('auth-phone-form');
+    const otpForm = document.getElementById('auth-otp-form');
     const signOutBtn = document.getElementById('sign-out-btn');
     const initial = document.getElementById('account-initial');
 
@@ -3671,7 +3701,8 @@
       userCard.classList.add('visible');
       nameEl.textContent = displayName;
       emailEl.textContent = email;
-      authForm.style.display = 'none';
+      phoneForm.style.display = 'none';
+      otpForm.style.display = 'none';
       signOutBtn.style.display = 'flex';
       initial.textContent = (displayName || email || 'S').charAt(0).toUpperCase();
       initial.classList.add('visible');
@@ -3680,7 +3711,9 @@
       userCard.classList.remove('visible');
       nameEl.textContent = '';
       emailEl.textContent = '';
-      authForm.style.display = 'block';
+      phoneForm.style.display = '';
+      otpForm.style.display = '';
+      setLoginMethod('phone');
       signOutBtn.style.display = 'none';
       initial.textContent = '';
       initial.classList.remove('visible');
@@ -3688,23 +3721,29 @@
     }
   }
 
-  async function sendMagicLink(event) {
+  async function sendPhoneOtp(event) {
     event.preventDefault();
     const client = await getSupabaseClient();
     if (!client) {
-      setAuthStatus('Add your Supabase URL and publishable key before enabling email login.');
+      setAuthStatus('Add your Supabase URL and publishable key before enabling phone login.');
       return;
     }
 
-    const email = document.getElementById('auth-email').value.trim();
-    if (!email) return;
+    const phone = document.getElementById('auth-phone').value.trim().replace(/\s+/g, '');
+    const fullName = document.getElementById('auth-name').value.trim();
+    if (!phone) return;
+    if (authMode === 'signup' && !fullName) {
+      setAuthStatus('Please enter your name to create an account.');
+      return;
+    }
 
-    setAuthStatus('Sending secure link...');
+    pendingPhone = phone;
+    setAuthStatus('Sending OTP...');
     const { error } = await client.auth.signInWithOtp({
-      email,
+      phone,
       options: {
-        emailRedirectTo: window.location.origin + window.location.pathname + '#auth',
-        shouldCreateUser: true
+        shouldCreateUser: authMode === 'signup',
+        data: authMode === 'signup' ? { full_name: fullName } : undefined
       }
     });
 
@@ -3713,7 +3752,32 @@
       return;
     }
 
-    setAuthStatus(`Check ${email} for your secure sign-in link.`);
+    setLoginMethod('otp');
+    setAuthStatus(`OTP sent to ${phone}.`);
+  }
+
+  async function verifyPhoneOtp(event) {
+    event.preventDefault();
+    const client = await getSupabaseClient();
+    if (!client) return;
+
+    const token = document.getElementById('auth-otp').value.trim();
+    if (!pendingPhone || !token) return;
+
+    setAuthStatus('Verifying OTP...');
+    const { data, error } = await client.auth.verifyOtp({
+      phone: pendingPhone,
+      token,
+      type: 'sms'
+    });
+
+    if (error) {
+      setAuthStatus(error.message);
+      return;
+    }
+
+    renderAuthState(data.user || data.session?.user || null);
+    setAuthStatus('You are signed in.');
   }
 
   async function signOut() {
