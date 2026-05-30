@@ -2250,19 +2250,22 @@
     .logo-wrap {
       gap: 0;
       z-index: 2;
+      flex: 1;
+      min-width: 0;
     }
     .logo-icon {
       width: 42px;
       height: 42px;
     }
     .logo-text {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 23px;
+      position: static;
+      transform: none;
+      margin-left: 10px;
+      font-size: clamp(19px, 5vw, 23px);
       letter-spacing: 1.4px;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       pointer-events: none;
     }
     .logo-sub {
@@ -2272,6 +2275,7 @@
     .header-actions {
       gap: 12px;
       z-index: 2;
+      flex-shrink: 0;
     }
     .mobile-search-btn {
       display: flex;
@@ -3753,6 +3757,23 @@
     }
 
     renderAuthState(data.user || data.session?.user || null);
+    const user = data.user || data.session?.user;
+
+if (user) {
+  await client
+    .from('customer_logins')
+    .upsert(
+      {
+        user_id: user.id,
+        full_name: user.user_metadata?.full_name || '',
+        phone: user.phone,
+        last_login_at: new Date().toISOString()
+      },
+      {
+        onConflict: 'user_id'
+      }
+    );
+}
     setAuthStatus('You are signed in.');
   }
 
